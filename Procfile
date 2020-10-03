@@ -1,1 +1,1 @@
-worker: python Bulin.py
+worker: python AiShindou.py
