@@ -38,6 +38,6 @@ ROLE_EXCEPTION = (
 
 #Остальные роли
 # Роль админов
-ROLE_ADMIN = 'Role'
+ROLE_ADMIN = 'Admin'
 # Роль модераторов
-ROLE_MODERATOR = 'Role'
+ROLE_MODERATOR = 'Moderator'
