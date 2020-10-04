@@ -5,7 +5,7 @@ import config
 from dotenv import load_dotenv
 load_dotenv()
 
-client = commands.Bot('bulin.')
+client = commands.Bot('Ai.')
 
 @client.event
 async def on_ready():
