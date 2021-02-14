@@ -1,8 +1,9 @@
-import discord
-import asyncio
-import os
+# import discord
+# import asyncio
+# import os
 from discord.ext import commands
-import subprocess
+# import subprocess
+
 
 class CogWork(commands.Cog):
 
@@ -42,6 +43,7 @@ class CogWork(commands.Cog):
     async def reload(self, ctx, extension):
         self.client.unload_extension(f'{extension}')
         self.client.load_extension(f'{extension}')'''
+
 
 def setup(client):
     client.add_cog(CogWork(client))

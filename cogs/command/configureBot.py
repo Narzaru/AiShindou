@@ -1,7 +1,6 @@
-import asyncio
 import json
-import discord
 from discord.ext import commands
+
 
 class ConfigureBot(commands.Cog):
 
