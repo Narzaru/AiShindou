@@ -2,7 +2,7 @@ import asyncio
 import discord
 from settingsClass import JsonShell
 from discord.ext import commands
-import random
+
 
 class BotJoin(commands.Cog):
 
@@ -47,7 +47,7 @@ class BotJoin(commands.Cog):
             'MAX_ROLE_PER_USER': None,
 
             'ROLE_ADMIN': {
-                'NAME' : None,
+                'NAME': None,
                 'ID': None
             }
         }
@@ -57,6 +57,7 @@ class BotJoin(commands.Cog):
 
     async def remove_default_settings(self, guild):
         pass
+
 
 def setup(client):
     client.add_cog(BotJoin(client))

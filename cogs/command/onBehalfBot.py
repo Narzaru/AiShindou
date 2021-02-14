@@ -1,21 +1,20 @@
 import io
 import aiohttp
-import asyncio
 import os
 import discord
 from discord.ext import commands
 from discord import utils
-from settingsClass import JsonShell
+
 
 class OnBehalfBot(commands.Cog):
-
     def __init__(self, client):
+        print(os.getcwd())
         self.client = client
 
     @commands.command()
-    async def send(self, ctx , messageID, channelID = None):
+    async def send(self, ctx, messageID, channelID=None):
 
-        if channelID == None or channelID == 'this':
+        if channelID is None or channelID == 'this':
             channel = ctx.channel
         else:
             channel = utils.get(ctx.guild.text_channels, id=int(channelID))
@@ -37,7 +36,7 @@ class OnBehalfBot(commands.Cog):
             await copiedMessage.delete()
 
     @commands.command()
-    async def react(self, ctx, reaction, messageID = None, channelID = None):
+    async def react(self, ctx, reaction, messageID=None, channelID = None):
 
         if channelID == None or channelID == 'this':
             channel = ctx.channel
