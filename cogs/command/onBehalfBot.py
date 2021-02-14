@@ -5,27 +5,20 @@ import os
 import discord
 from discord.ext import commands
 from discord import utils
-import config
+from settingsClass import JsonShell
 
 class OnBehalfBot(commands.Cog):
 
     def __init__(self, client):
         self.client = client
 
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
-        await ctx.send(embed = discord.Embed(description =
-        f'**Ой-ой, прости, <@{ctx.author.id}>, но такой команды не существует.**', color = discord.Color.red())
-        )
-
     @commands.command()
-    @commands.has_role(config.ROLE_ADMIN)
-    async def send(self, ctx, messageID, channelName = None, deleteMessage = False):
+    async def send(self, ctx , messageID, channelID = None):
 
-        if channelName == None or channelName == 'this':
+        if channelID == None or channelID == 'this':
             channel = ctx.channel
         else:
-            channel = utils.get(ctx.guild.text_channels, name=channelName)
+            channel = utils.get(ctx.guild.text_channels, id=int(channelID))
         commadMessage = ctx.message
         copiedMessage = await channel.fetch_message(messageID)
 
@@ -40,20 +33,16 @@ class OnBehalfBot(commands.Cog):
         else:
             await ctx.send(f'{copiedMessage.content}')
 
-        if not deleteMessage:
-            await commadMessage.delete()
-        else:
             await commadMessage.delete()
             await copiedMessage.delete()
 
     @commands.command()
-    @commands.has_role(config.ROLE_ADMIN)
-    async def react(self, ctx, messageID, reaction ,channelName = None):
+    async def react(self, ctx, reaction, messageID = None, channelID = None):
 
-        if channelName == None or channelName == 'this':
+        if channelID == None or channelID == 'this':
             channel = ctx.channel
         else:
-            channel = utils.get(ctx.guild.text_channels, name=channelName)
+            channel = utils.get(ctx.guild.text_channels, id=int(channelID))
 
         commandMessage = ctx.message
         message = await channel.fetch_message(messageID)
