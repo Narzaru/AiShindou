@@ -3,3 +3,5 @@
 examples.py
 .env
 reworkedConfig.py
+test.py
+**/**.mp3

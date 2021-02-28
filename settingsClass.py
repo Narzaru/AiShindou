@@ -1,5 +1,6 @@
 import json
 
+
 class JsonShell():
 
     def __init__(self, filePath=str, encoding='utf-8'):
@@ -19,7 +20,7 @@ class JsonShell():
             return None
 
     def dump(self, filePath=None):
-        if filePath == None:
+        if filePath is not None:
             filePath = self.filePath
         with open(file=filePath, mode='w', encoding='utf-8') as file:
             json.dump(self.data, file, indent=4, ensure_ascii=False)
@@ -29,6 +30,7 @@ class JsonShell():
 
     def put(self, data=str):
         self.data = data
+
 
 '''{
     "599993492382416907": {

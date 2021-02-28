@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from settingsClass import JsonShell
 
 
-# Finding a guild prefix in the list (serversPrefixes)
+# Finding a guild prefix in the list (serversPrefixes.json)
 def get_prefix(client, message):
     data = JsonShell('serversPrefixes.json')
     prefixes = data.get()
@@ -20,6 +20,7 @@ def get_prefix(client, message):
 # Initialize bot
 intents = discord.Intents.default()
 intents.members = True
+intents.presences = True
 client = commands.Bot(command_prefix=get_prefix, intents=intents)
 
 
