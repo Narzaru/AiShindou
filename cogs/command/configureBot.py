@@ -1,13 +1,5 @@
 from settingsClass import JsonShell
 from discord.ext import commands
-import nacl
-
-import discord
-import youtube_dl
-import os
-from discord.utils import get
-from discord import FFmpegPCMAudio
-from os import system
 
 
 class configuration(commands.Cog):

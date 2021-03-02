@@ -50,7 +50,6 @@ class Initialization():
             print(f"[ERROR] intent by key({key}) not found or incorrecnt value({value})")
         return self
 
-
     def set_intents(self, **kwargs):
         for key, value in kwargs.items():
             self.set_intent(key, value)
@@ -102,7 +101,8 @@ if __name__ == "__main__":
     main()
 
 
-'''webhooks:True
+'''
+webhooks:True
 voice_states:True
 typing:True
 reactions:True
@@ -118,4 +118,5 @@ guild_messages:True
 emojis:True
 dm_typing:True
 dm_reactions:True
-dm_messages:True'''
+dm_messages:True
+'''
