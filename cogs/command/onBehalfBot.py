@@ -10,6 +10,7 @@ class OnBehalfBot(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def send(self, ctx, messageID, fromChannelID=None, toChannelID=None):
         if fromChannelID is None or fromChannelID == 'this':
             fromChannel = ctx.channel
@@ -35,8 +36,9 @@ class OnBehalfBot(commands.Cog):
             await copiedMessage.delete()
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def react(self, ctx, reaction, messageID=None, channelID=None):
-        if channelID is not None or channelID == 'this':
+        if channelID is None or channelID == 'this':
             channel = ctx.channel
         else:
             channel = utils.get(ctx.guild.text_channels, id=int(channelID))
