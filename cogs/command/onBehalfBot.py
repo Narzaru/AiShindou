@@ -10,13 +10,17 @@ class OnBehalfBot(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def send(self, ctx, messageID, channelID=None):
-        if channelID is None or channelID == 'this':
-            channel = ctx.channel
+    async def send(self, ctx, messageID, fromChannelID=None, toChannelID=None):
+        if fromChannelID is None or fromChannelID == 'this':
+            fromChannel = ctx.channel
         else:
-            channel = utils.get(ctx.guild.text_channels, id=int(channelID))
+            fromChannel = utils.get(ctx.guild.text_channels, id=int(fromChannelID))
+        if toChannelID is None or toChannelID == 'this':
+            toChannel = ctx.channel
+        else:
+            toChannel = utils.get(ctx.guild.text_channels, id=int(toChannelID))
         commadMessage = ctx.message
-        copiedMessage = await channel.fetch_message(messageID)
+        copiedMessage = await fromChannel.fetch_message(messageID)
         if len(copiedMessage.attachments) > 0:
             imageURL = copiedMessage.attachments[0].url
             async with aiohttp.ClientSession() as session:
@@ -24,9 +28,9 @@ class OnBehalfBot(commands.Cog):
                     if resp.status != 200:
                         return await ctx.send('Не получилось скачать изображение')
                     image = io.BytesIO(await resp.read())
-            await ctx.send(f'{copiedMessage.content}', file=discord.File(image, 'cool_image.png'))
+            await toChannel.send(f'{copiedMessage.content}', file=discord.File(image, 'cool_image.png'))
         else:
-            await ctx.send(f'{copiedMessage.content}')
+            await toChannel.send(f'{copiedMessage.content}')
             await commadMessage.delete()
             await copiedMessage.delete()
 

@@ -1,49 +1,46 @@
-# import discord
-# import asyncio
-# import os
+import discord
 from discord.ext import commands
-# import subprocess
+import os
 
 
 class CogWork(commands.Cog):
 
-    def __init__(self, client):
+    def __init__(self, client, ext):
+        # Extensions
+        self.ext = ext
+        # Bot class
         self.client = client
 
-    '''@commands.command()
-    @commands.has_role(item=config.ROLE_TECH_ADNIN['id'])
-    async def listdir(self, ctx, directory = ''):
-        dir = '.' + directory
-        output = ''
-        try:
-            for folder in os.listdir(path=dir):
-                if folder[0] != '_' and folder[0] != '.':
-                    output += '|-' + folder + '\n'
-            await ctx.send(f'Моя структура папок, ~сенпай!\n```{output}```')
-        except FileNotFoundError:
-            await ctx.send(f'Папка не найдена!')
+    @commands.command()
+    @commands.is_owner()
+    async def unload_cogs_command(self, ctx):
+        for item in self.ext:
+            try:
+                self.client.unload_extension(item)
+            except Exception as e:
+                await ctx.send(f"{type(e).__name__}, {e}")
+        self.ext *= 0
 
     @commands.command()
-    @commands.has_role(item=config.ROLE_TECH_ADNIN['id'])
-    async def herokuLogs(self,ctx):
-        await ctx.send(subprocess.check_output("heroku logs", shell=True))
+    @commands.is_owner()
+    async def load_cogs_command(self, ctx):
+        self.ext.clear()
+        for folder in os.listdir(path='./cogs'):
+            for file in os.listdir(path=f'./cogs/{folder}'):
+                if file.endswith('.py') and file[:-3] not in self.client.cogs.keys():
+                    if file[:-3] != "reworkCogWork":
+                        self.ext.append(f'cogs.{folder}.{file[:-3]}')
+                        try:
+                            self.client.load_extension(f'cogs.{folder}.{file[:-3]}')
+                        except Exception as e:
+                            await ctx.send(f"{type(e).__name__}, {e}")
 
     @commands.command()
-    @commands.has_role(item=config.ROLE_TECH_ADNIN['id'])
-    async def load(self, ctx, extension):
-        self.client.load_extension(f'{extension}')
-
-    @commands.command()
-    @commands.has_role(item=config.ROLE_TECH_ADNIN['id'])
-    async def unload(self, ctx, extension):
-        self.client.unload_extension(f'{extension}')
-
-    @commands.command()
-    @commands.has_role(item=config.ROLE_TECH_ADNIN['id'])
-    async def reload(self, ctx, extension):
-        self.client.unload_extension(f'{extension}')
-        self.client.load_extension(f'{extension}')'''
+    @commands.is_owner()
+    async def reload_cog_command(self, ctx):
+        await self.unload_cogs(ctx)
+        await self.load_cogs(ctx)
 
 
 def setup(client):
-    client.add_cog(CogWork(client))
+    client.add_cog(CogWork(client, client.ext))

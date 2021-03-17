@@ -6,11 +6,10 @@ class configuration(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.voice = None
 
     @commands.has_permissions(administrator=True)
-    @commands.command()
-    async def prefix(self, ctx, *prefix):
+    @commands.command(name="prefix")
+    async def change_prefix_command(self, ctx, *prefix):
         data = JsonShell('serversPrefixes.json')
         currentPrefix = data.get()
         if len(prefix) > 0:

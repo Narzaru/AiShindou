@@ -8,12 +8,12 @@ class GlobarErrorHandler(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx: commands.Context, error):
+    async def on_command_error(self, ctx, error):
         # not @has_role
         if isinstance(error, commands.MissingRole):
             embed = discord.Embed(
                 title='Ой-ой, ошибочка !',
-                description=(f'**<@{ctx.author.id}>, у тебя отсутствует роль `{error.missing_role}`!**'),
+                description=(f'**<@{ctx.author.id}>, у тебя отсутствует необходимая роль `{error.missing_role}`!**'),
                 color=0xff0000
             )
         # not @has_permissions

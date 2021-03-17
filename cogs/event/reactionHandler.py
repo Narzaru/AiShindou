@@ -15,11 +15,11 @@ class ReactionHandler(commands.Cog):
             data = file.get()
             serverData = data[str(payload.guild_id)]
             if payload.message_id == int(serverData['RULE_MESSAGE_ID']):
-                await self.set_quest(payload)
+                await self.set_guest(payload)
             if payload.message_id == int(serverData['ROLE_MESSAGE_ID']):
                 await self.set_roles(payload)
 
-    async def set_quest(self, payload):
+    async def set_guest(self, payload):
         file = JsonShell('serversSettings.json')
         data = file.get()
         serverData = data[str(payload.guild_id)]
