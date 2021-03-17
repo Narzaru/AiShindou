@@ -37,9 +37,9 @@ class CogWork(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def reload_cog_command(self, ctx):
-        await self.unload_cogs(ctx)
-        await self.load_cogs(ctx)
+    async def reload_cogs_command(self, ctx):
+        await self.unload_cogs_command(ctx)
+        await self.load_cogs_command(ctx)
 
 
 def setup(client):
