@@ -5,3 +5,5 @@ examples.py
 reworkedConfig.py
 test.py
 **/**.mp3
+serversSettings.json
+serversPrefixes.json
