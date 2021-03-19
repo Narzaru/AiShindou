@@ -31,9 +31,11 @@ class OnBehalfBot(commands.Cog):
                     image = io.BytesIO(await resp.read())
             await toChannel.send(f'{copiedMessage.content}', file=discord.File(image, 'cool_image.png'))
         else:
-            await toChannel.send(f'{copiedMessage.content}')
+            message = await toChannel.send(f'{copiedMessage.content}')
             await commadMessage.delete()
             await copiedMessage.delete()
+            for emoji in copiedMessage.reactions:
+                await message.add_reaction(emoji)
 
     @commands.command()
     @commands.has_permissions(administrator=True)
