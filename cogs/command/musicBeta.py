@@ -429,8 +429,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 inline=False
             )
 
-        msg = await ctx.send(embed=embed)
-
+        await ctx.send(embed=embed)
+        # msg = await ctx.send(embed=embed)
 
     @queue_command.error
     async def queue_command_error(self, ctx, exc):
