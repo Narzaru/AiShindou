@@ -1,14 +1,22 @@
+# folders
 **/__pycache__
 /.vscode
+Lavalink
+
+# py files
 examples.py
-.env
 reworkedConfig.py
 test.py
+
+# environment
+.env
+
+# misc fiels
 **/**.mp3
+
+# private files
 serversSettings.json
 serversPrefixes.json
 settings.json
-Lavalink
 start.bat
-SQL_TEST.py
 discordBot.db
