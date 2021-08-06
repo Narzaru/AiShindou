@@ -1,8 +1,8 @@
-#DISCORD EMBED
+# DISCORD EMBED
 
 #
 
-##Создание Embed
+## Создание Embed
 ```py
 embed_variable = discord.Embed(
     title='title',                  # заголовок Embed
@@ -12,17 +12,17 @@ embed_variable = discord.Embed(
     url='https://www.youtube.com/'  # ссылка Embed
 )
 ```
-#####Типы embed
+##### Типы embed
 * rich (типичный эмбэд, используется чаще всего ботами)
 * link (обычная ссылка)
 * video (обычная ссылка, например видео с youtube)
 
-####результат
+#### результат
 ![image](./misc/images/0644.jpg)
 
 #
 
-##Нижний "колонтитул"
+## Нижний "колонтитул"
 ```py
 embed_variable.set_footer(
     text='footer name',                               # содержание нижнего колонтитула
@@ -30,36 +30,36 @@ embed_variable.set_footer(
     )
 ```
 
-####результат
+#### результат
 ![image](./misc/images/0642.jpg)
 
 #
 
-##Добавление изображения к Embed
+## Добавление изображения к Embed
 ```py
 embed_variable.set_image(
     url='https://img.icons8.com/cotton/2x/image--v2.png' # ссылка на изображение
     )
 ```
 
-####результат
+#### результат
 ![image](./misc/images/0646.jpg)
 
 #
 
-##Добавление миниатюры
+## Добавление миниатюры
 ```py
 embed_variable.set_thumbnail(
     url='https://img.icons8.com/ios/452/image.png'
     )
 ```
 
-####результат
+#### результат
 ![image](./misc/images/0647.jpg)
 
 #
 
-##Добовление автора к Embed
+## Добовление автора к Embed
 ```py
 embed_variable.set_author(
     name='author name',               # имя автора
@@ -70,12 +70,12 @@ embed_variable.set_author(
 # embed_variable.remove_author()       # удаление поля
 ```
 
-####результат
+#### результат
 ![image](./misc/images/0647.jpg)
 
 #
 
-##Добавление поле в Embed
+## Добавление поле в Embed
 ```py
 embed_variable.add_field(
     name='name0',          # Имя поля
@@ -115,7 +115,6 @@ embed_variable.insert_field_at(
 ![image](./misc/images/0649.jpg)
 
 #
-
 
 ## Модификация полей Embed
 ```py
