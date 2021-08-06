@@ -1,6 +1,7 @@
 from discord import utils
 from discord.ext import commands
-from settingsClass import JsonShell
+from service.utils import JsonShell
+from service.sql import sqlite, Factory
 
 
 class ReactionHandler(commands.Cog):
@@ -11,8 +12,11 @@ class ReactionHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         if self.client.user.id != payload.user_id:
-            file = JsonShell('serversSettings.json')
-            data = file.get()
+            db = sqlite("D:\\python\\Ai Shindou\\service\\discordBot.db")
+            data = db.select(columns_name="prefix", table_name="prefixes", factory=Factory.string_factory)
+            print(data[0])
+            file = JsonShell('service\\serversSettings.json')
+            data = file.get_data()
             serverData = data[str(payload.guild_id)]
             if payload.message_id == int(serverData['RULE_MESSAGE_ID']):
                 await self.set_guest(payload)
@@ -20,8 +24,8 @@ class ReactionHandler(commands.Cog):
                 await self.set_roles(payload)
 
     async def set_guest(self, payload):
-        file = JsonShell('serversSettings.json')
-        data = file.get()
+        file = JsonShell('service\\serversSettings.json')
+        data = file.get_data()
         serverData = data[str(payload.guild_id)]
         try:
             guild = self.client.get_guild(payload.guild_id)
@@ -42,8 +46,8 @@ class ReactionHandler(commands.Cog):
             await message.remove_reaction(payload.emoji, member)
 
     async def set_roles(self, payload):
-        file = JsonShell('serversSettings.json')
-        data = file.get()
+        file = JsonShell('service\\serversSettings.json')
+        data = file.get_data()
         serverData = data[str(payload.guild_id)]
         try:
             guild = self.client.get_guild(payload.guild_id)

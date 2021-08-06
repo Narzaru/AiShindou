@@ -4,7 +4,7 @@ import random
 import discord
 import pytz
 from discord.ext import commands
-from settingsClass import JsonShell
+from service.utils import JsonShell
 
 
 class JoinEvents(commands.Cog):
@@ -25,10 +25,6 @@ class JoinEvents(commands.Cog):
             print(f'{member} has left a server:')
             print(f'{member.guild}(id: {member.guild.id})')
             await self.__goodbye(member=member)
-
-    @commands.command()
-    async def test(self, ctx):
-        await self.__welcome(ctx.author)
 
     async def __welcome(self, member: discord.member):
         file = JsonShell('serversSettings.json')

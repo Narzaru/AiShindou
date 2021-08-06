@@ -1,4 +1,4 @@
-from settingsClass import JsonShell
+from service.utils import JsonShell
 from discord.ext import commands
 
 
